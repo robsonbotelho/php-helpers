@@ -429,6 +429,11 @@ class Timer
     }
     private function timeToSeconds($time)
     {
+        if (strstr($time, '-')) {
+            $sinal = '-';
+            $time = str_replace('-', '', $time);
+        }
+        else $sinal = '';
         $t = array_reverse(explode(':', $time));
         for($i = 0; $i < count($t); $i++) {
             switch($i) {
@@ -440,7 +445,7 @@ class Timer
             }
             $t[$i] *= $x;
         }
-        return array_sum($t);
+        return $sinal . array_sum($t);
     }
     private function timeToUnits($time)
     {
